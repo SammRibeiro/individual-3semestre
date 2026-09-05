@@ -2,6 +2,7 @@ package com.github.sammribeiro.projeto_individual.controller;
 
 import com.github.sammribeiro.projeto_individual.domain.Conteudo;
 import com.github.sammribeiro.projeto_individual.service.ConteudoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,9 @@ public class ConteudoController {
     @PostMapping
     public ResponseEntity<String> salvar(@RequestBody Conteudo conteudo) {
 
+        if (conteudo == null) {
+            return ResponseEntity.badRequest().body("JSON INVALIDO");
+        }
         if (conteudo.getTitulo() == null || conteudo.getTitulo().isBlank()) {
             return ResponseEntity.badRequest().body("Preencha o título.");
         }
