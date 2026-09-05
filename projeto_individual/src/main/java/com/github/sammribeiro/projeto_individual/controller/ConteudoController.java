@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/conteudos")
 public class ConteudoController {
+
 
     private final ConteudoService service;
 
@@ -18,11 +20,31 @@ public class ConteudoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvar(@RequestBody Conteudo conteudo) {
+    public ResponseEntity<String> salvar(@RequestBody Conteudo conteudo) {
+
+        if (conteudo.getTitulo() == null || conteudo.getTitulo().isBlank()) {
+            return ResponseEntity.badRequest().body("Preencha o título.");
+        }
+
+        if (conteudo.getTipo() == null || conteudo.getTipo().isBlank()) {
+            return ResponseEntity.badRequest().body("Preencha o tipo.");
+        }
+
+        if (conteudo.getGenero() == null || conteudo.getGenero().isBlank()) {
+            return ResponseEntity.badRequest().body("Preencha o gênero.");
+        }
+
+        if (conteudo.getAnoLancamento() == null) {
+            return ResponseEntity.badRequest().body("Preencha o ano de lançamento.");
+        }
+
+        if (conteudo.getPlataforma() == null || conteudo.getPlataforma().isBlank()) {
+            return ResponseEntity.badRequest().body("Preencha a plataforma.");
+        }
 
         service.salvar(conteudo);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(201).body("Conteúdo cadastrado com sucesso!");
     }
 
     @GetMapping
