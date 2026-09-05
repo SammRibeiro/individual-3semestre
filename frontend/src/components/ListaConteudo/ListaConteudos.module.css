@@ -1,0 +1,41 @@
+
+.lista {
+    width: 900px;
+    max-width: 90%;
+    margin: 40px auto;
+}
+
+.lista h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.conteudo {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #181818;
+    border: 1px solid #333;
+    transition: transform 0.2s;
+}
+
+.conteudo:hover {
+    transform: translateY(-3px);
+}
+
+.conteudo h3 {
+    margin: 0 0 12px;
+    font-size: 21px;
+}
+
+.conteudo p {
+    margin: 6px 0;
+    color: #ccc;
+}
+
